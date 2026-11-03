@@ -1,0 +1,26 @@
+environment = {'A': 'Dirty', 'B': 'Dirty'}
+location = 'A'
+cost = 0
+
+def agent(location, status):
+    if status == 'Dirty':
+        return 'Suck'
+    return 'Right' if location == 'A' else 'Left'
+
+while 'Dirty' in environment.values():
+    status = environment[location]
+    action = agent(location, status)
+
+    print(location, status, action)
+
+    if action == 'Suck':
+        environment[location] = 'Clean'
+    elif action == 'Right':
+        location = 'B'
+    else:
+        location = 'A'
+
+    cost += 1
+
+print("Final:", environment)
+print("Path Cost:", cost)
