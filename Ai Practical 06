@@ -1,0 +1,35 @@
+def dfs(r, c):
+    if r < 0 or c < 0 or r >= 5 or c >= 5:
+        return False
+
+    if maze[r][c] == 1 or visited[r][c]:
+        return False
+
+    visited[r][c] = True
+    path.append((r, c))
+
+    if (r, c) == goal:
+        return True
+
+    for dr, dc in [(1,0), (0,1), (-1,0), (0,-1)]:
+        if dfs(r + dr, c + dc):
+            return True
+
+    path.pop()
+    return False
+
+
+maze = [
+    [0,1,0,0,0],
+    [0,1,0,1,0],
+    [0,0,0,1,0],
+    [1,1,0,0,0],
+    [0,0,0,1,0]
+]
+
+visited = [[False]*5 for _ in range(5)]
+path = []
+goal = (4,2)
+
+print("Path Found:", dfs(0,0))
+print("DFS Path:", path)
