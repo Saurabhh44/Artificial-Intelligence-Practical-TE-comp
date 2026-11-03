@@ -1,0 +1,13 @@
+def hanoi(n, A, B, C):
+    if n == 0:
+        return
+
+    hanoi(n-1, A, C, B)
+    print("Move", n, "from", A, "to", C)
+    hanoi(n-1, B, A, C)
+
+
+n = int(input("Enter disks: "))
+hanoi(n, 'A', 'B', 'C')
+
+print("Minimum moves:", 2**n - 1)
