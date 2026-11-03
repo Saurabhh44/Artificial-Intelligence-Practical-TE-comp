@@ -1,0 +1,40 @@
+import heapq
+
+goal = (1,2,3,4,5,6,7,8,0)
+
+def h(s):
+    return sum(abs(i//3-goal.index(x)//3) +
+               abs(i%3-goal.index(x)%3)
+               for i,x in enumerate(s) if x)
+
+def astar(start):
+    q = [(h(start), 0, start)]
+    seen = set()
+
+    while q:
+        f, g, s = heapq.heappop(q)
+
+        if s in seen:
+            continue
+        seen.add(s)
+
+        if s == goal:
+            return s
+
+        z = s.index(0)
+        r, c = divmod(z, 3)
+
+        for dr, dc in [(1,0),(-1,0),(0,1),(0,-1)]:
+            nr, nc = r+dr, c+dc
+
+            if 0 <= nr < 3 and 0 <= nc < 3:
+                x = nr*3 + nc
+                t = list(s)
+                t[z], t[x] = t[x], t[z]
+                t = tuple(t)
+
+                heapq.heappush(q, (g+1+h(t), g+1, t))
+
+start = (1,2,3,4,0,6,7,5,8)
+
+print("Solution:", astar(start))
