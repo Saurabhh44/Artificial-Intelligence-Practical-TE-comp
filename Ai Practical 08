@@ -1,0 +1,28 @@
+def chatbot(msg):
+    msg = msg.lower()
+
+    if "hello" in msg or "hi" in msg:
+        return "Hello! How can I help?"
+
+    if "bfs" in msg:
+        return "BFS searches level by level."
+
+    if "dfs" in msg:
+        return "DFS searches deeply first."
+
+    if "a*" in msg:
+        return "A* uses f(n) = g(n) + h(n)."
+
+    return "I don't understand."
+
+
+print("Simple Chatbot")
+
+while True:
+    msg = input("You: ")
+
+    if msg.lower() in ["bye", "exit"]:
+        print("Bot: Goodbye!")
+        break
+
+    print("Bot:", chatbot(msg))
